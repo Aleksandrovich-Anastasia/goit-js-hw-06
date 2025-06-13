@@ -1,13 +1,27 @@
-function formatMessage(message, maxLength) {
-    if (message.length <= maxLength) {
-        return message;
-    } else {
-        return `${message.slice(0, maxLength)}...`
+class Storage{
+    #items;
+
+  constructor(items) {
+    this.#items = items;
+  }
+    getItems() {
+        return this.#items;
+    }
+    addItem(newItem) {
+        this.#items.push(newItem);
+    } 
+    removeItem(itemToRemove) {
+        this.#items = this.#items.filter(item => item !== itemToRemove);
     }
 }
-console.log(formatMessage("Curabitur ligula sapien", 16));
-console.log(formatMessage("Curabitur ligula sapien", 23)); 
-console.log(formatMessage("Vestibulum facilisis purus nec", 20)); 
-console.log(formatMessage("Vestibulum facilisis purus nec", 30)); 
-console.log(formatMessage("Nunc sed turpis a felis in nunc fringilla", 15)); 
-console.log(formatMessage("Nunc sed turpis a felis in nunc fringilla", 41)); 
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scaner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
